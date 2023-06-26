@@ -13,16 +13,16 @@ class PopularMoveRepoImpl {
     final data = await dioInstance.get('popular');
 
     PopularMovieList popularMovieModel = PopularMovieList.fromJson(data.data);
+
     return popularMovieModel;
   }
 
-  void getTopRatedMovie() async {
-    final data = await dioInstance.get('top_rated');
-    print("DAATAA==> $data");
+
+  Future<PopularMovieList>getTopRatedMovies()async{
+    final jsonResponse = await dioInstance.get('top_rated');
+    PopularMovieList popularMovieModel = PopularMovieList.fromJson(jsonResponse.data);
+
+    return popularMovieModel;
   }
 
-  void getTopUpcomingMovie() async {
-    final data = await dioInstance.get('top_rated');
-    print("DAATAA==> $data");
-  }
 }

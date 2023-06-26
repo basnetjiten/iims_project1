@@ -20,7 +20,7 @@ class PopularMovieList {
 
   factory PopularMovieList.fromJson(Map<String, dynamic> json) => PopularMovieList(
     page: json["page"],
-    results: List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
+    results: List<Result>.from(json["results"].map((singleResult) => Result.fromJson(singleResult))),
     totalPages: json["total_pages"],
     totalResults: json["total_results"],
   );

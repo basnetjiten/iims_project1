@@ -7,8 +7,15 @@ class MovieInitial extends MovieState {}
 
 class MovieFetching extends MovieState {}
 
-class MovieFetched extends MovieState {
-  MovieFetched(this.movieResults);
+class PopularMovieFetched extends MovieState {
+
+  PopularMovieFetched(this.movieResults);
 
   final List<Result> movieResults;
+}
+
+class TrendingMovieFetched extends MovieState{
+
+  TrendingMovieFetched(this.trendingMovieResult);
+  late final List<Result> trendingMovieResult;
 }

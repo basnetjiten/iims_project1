@@ -14,13 +14,23 @@ class MovieCubit extends Cubit<MovieState> {
   late PopularMoveRepoImpl movieRepo;
 
   void getPopularMovieData() async {
-
     emit(MovieFetching());
 
     final movieModel = await movieRepo.getPopularMovie();
 
     if (movieModel.results.isNotEmpty) {
-      emit(MovieFetched(movieModel.results));
+      emit(PopularMovieFetched(movieModel.results));
+    }
+  }
+
+  void fetchTrendingMovieData() async {
+    emit(MovieFetching());
+
+    final topRatedMovie = await movieRepo.getTopRatedMovies();
+
+    if (topRatedMovie.results.isNotEmpty) {
+
+      emit(TrendingMovieFetched(topRatedMovie.results));
     }
   }
 }

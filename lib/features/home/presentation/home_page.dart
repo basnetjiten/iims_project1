@@ -39,8 +39,9 @@ class _HomePageState extends State<HomePage> {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is MovieFetched) {
+            } else if (state is PopularMovieFetched) {
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Text("Trending TV Shows This Week"),
@@ -52,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           final singleMovieResult = state.movieResults[index];
-                          print(singleMovieResult.posterPath);
+
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
