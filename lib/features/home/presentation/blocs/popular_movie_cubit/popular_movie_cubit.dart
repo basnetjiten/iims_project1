@@ -5,9 +5,9 @@ import 'package:meta/meta.dart';
 
 part 'movie_state.dart';
 
-class MovieCubit extends Cubit<MovieState> {
+class PopularMovieCubit extends Cubit<MovieState> {
   //constructor that initializes the movieRepo
-  MovieCubit()
+  PopularMovieCubit()
       : movieRepo = PopularMoveRepoImpl(),
         super(MovieInitial());
 
@@ -23,16 +23,7 @@ class MovieCubit extends Cubit<MovieState> {
     }
   }
 
-  void fetchTrendingMovieData() async {
-    emit(MovieFetching());
 
-    final topRatedMovie = await movieRepo.getTopRatedMovies();
-
-    if (topRatedMovie.results.isNotEmpty) {
-
-      emit(TrendingMovieFetched(topRatedMovie.results));
-    }
-  }
 }
 
 // class Apple {

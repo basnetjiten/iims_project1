@@ -1,4 +1,4 @@
-part of 'movie_cubit.dart';
+part of 'popular_movie_cubit.dart';
 
 @immutable
 abstract class MovieState {}
@@ -14,8 +14,4 @@ class PopularMovieFetched extends MovieState {
   final List<Result> movieResults;
 }
 
-class TrendingMovieFetched extends MovieState{
 
-  TrendingMovieFetched(this.trendingMovieResult);
-  late final List<Result> trendingMovieResult;
-}
