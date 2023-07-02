@@ -42,9 +42,13 @@ abstract class $AppRouter extends _i6.RootStackRouter {
       );
     },
     ProfileRoute.name: (routeData) {
+      final args = routeData.argsAs<ProfileRouteArgs>();
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.ProfilePage(),
+        child: _i4.ProfilePage(
+          key: args.key,
+          userName: args.userName,
+        ),
       );
     },
     MyHomeRoute.name: (routeData) {
@@ -104,16 +108,40 @@ class LoginRoute extends _i6.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.ProfilePage]
-class ProfileRoute extends _i6.PageRouteInfo<void> {
-  const ProfileRoute({List<_i6.PageRouteInfo>? children})
-      : super(
+class ProfileRoute extends _i6.PageRouteInfo<ProfileRouteArgs> {
+  ProfileRoute({
+    _i7.Key? key,
+    required String userName,
+    List<_i6.PageRouteInfo>? children,
+  }) : super(
           ProfileRoute.name,
+          args: ProfileRouteArgs(
+            key: key,
+            userName: userName,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ProfileRoute';
 
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+  static const _i6.PageInfo<ProfileRouteArgs> page =
+      _i6.PageInfo<ProfileRouteArgs>(name);
+}
+
+class ProfileRouteArgs {
+  const ProfileRouteArgs({
+    this.key,
+    required this.userName,
+  });
+
+  final _i7.Key? key;
+
+  final String userName;
+
+  @override
+  String toString() {
+    return 'ProfileRouteArgs{key: $key, userName: $userName}';
+  }
 }
 
 /// generated route for

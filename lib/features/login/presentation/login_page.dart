@@ -1,4 +1,8 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:awesome_app_iims/core/router.gr.dart';
+import 'package:awesome_app_iims/core/utils/shared_pref.dart';
+import 'package:awesome_app_iims/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -12,7 +16,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
-  String? username;
+  String? _username;
+  String? _password;
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +32,43 @@ class _LoginPageState extends State<LoginPage> {
                 height: 50,
               ),
               TextFormField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
+                  enabled: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                      color: Colors.grey,
+                      width: 2.0,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                      color: Colors.purple,
+                      width: 2.0,
+                    ),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                      color: Colors.redAccent,
+                      width: 2.0,
+                    ),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                      color: Colors.redAccent,
+                      width: 2.0,
+                    ),
+                  ),
                   hintText: 'Please enter your username',
-                  label: Text(
+                  label: const Text(
                     'Username',
                   ),
                 ),
                 onChanged: (userData) {
-                  username = userData;
+                  _username = userData;
                 },
                 validator: (userInputData) {
                   if (userInputData != null && userInputData.trim().isEmpty) {
@@ -49,10 +83,38 @@ class _LoginPageState extends State<LoginPage> {
                 height: 50,
               ),
               TextFormField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: 'Please enter your password',
-                  label: Text(
+                  label: const Text(
                     'Password',
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                      color: Colors.grey,
+                      width: 2.0,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                      color: Colors.purple,
+                      width: 2.0,
+                    ),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                      color: Colors.redAccent,
+                      width: 2.0,
+                    ),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                      color: Colors.redAccent,
+                      width: 2.0,
+                    ),
                   ),
                 ),
                 validator: (userInputPassword) {
@@ -66,6 +128,9 @@ class _LoginPageState extends State<LoginPage> {
                   }
                   return null;
                 },
+                onChanged: (passwordInput) {
+                  _password = passwordInput;
+                },
               ),
               const SizedBox(
                 height: 100,
@@ -74,7 +139,15 @@ class _LoginPageState extends State<LoginPage> {
                 color: Colors.blue,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    print(username);
+                    //  context.router.navigate(ProfileRoute(userName: _username!));
+                    // Navigator.of(context).push(
+                    //   MaterialPageRoute(
+                    //     builder: (context) => ProfilePage(userName: _username!),
+                    //   ),
+                    // );
+
+                    PreferenceUtils.setString('username', _username!);
+                    PreferenceUtils.storeInt('rollNo', 22);
                   }
                 },
                 child: const Text('Login'),

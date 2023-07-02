@@ -1,11 +1,13 @@
 import 'package:awesome_app_iims/blocs/counter_cubit.dart';
 import 'package:awesome_app_iims/core/router.dart';
+import 'package:awesome_app_iims/core/utils/shared_pref.dart';
 import 'package:awesome_app_iims/features/home/data/popular_movie_repo_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 
-void main() {
+void main()async {
+  await PreferenceUtils.init();
   runApp(MyApp());
 }
 

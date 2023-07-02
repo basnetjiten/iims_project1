@@ -7,15 +7,17 @@ import 'package:flutter/material.dart';
 
 @RoutePage()
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({super.key, required this.userName});
+
+  final String userName;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Netflix',
-          style: TextStyle(color: Colors.white),
+        title: Text(
+          userName,
+          style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.red,
       ),
@@ -67,8 +69,7 @@ class ProfilePage extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-
-                 context.pushRoute(const HomeRoute());
+                  context.pushRoute(const HomeRoute());
                 },
                 child: Container(
                   height: 200,
