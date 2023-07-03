@@ -2,6 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:awesome_app_iims/core/router.gr.dart';
 import 'package:awesome_app_iims/core/utils/shared_pref.dart';
+import 'package:awesome_app_iims/features/home/presentation/home_page.dart';
 import 'package:awesome_app_iims/features/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 
@@ -121,9 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (userInputPassword != null &&
                       userInputPassword.trim().isEmpty) {
                     return 'Password is required field';
-                  } else if (!userInputPassword!.contains('@')) {
-                    return 'Password must contain @ character';
-                  } else if (userInputPassword.length < 10) {
+                  } else if (userInputPassword!.length < 5) {
                     return 'Password must be greater than 10 character';
                   }
                   return null;
@@ -137,17 +136,27 @@ class _LoginPageState extends State<LoginPage> {
               ),
               MaterialButton(
                 color: Colors.blue,
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    //  context.router.navigate(ProfileRoute(userName: _username!));
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //     builder: (context) => ProfilePage(userName: _username!),
-                    //   ),
-                    // );
+                    final String storedUserName =
+                        PreferenceUtils.getString('username');
+                    final String storedPassword =
+                        PreferenceUtils.getString('password');
 
-                    PreferenceUtils.setString('username', _username!);
-                    PreferenceUtils.storeInt('rollNo', 22);
+                    if (storedPassword == _password &&
+                        _username == storedUserName) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const HomePage()));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Center(
+                            child: Text('Invalid username or password'),
+                          ),
+                        ),
+                      );
+                    }
                   }
                 },
                 child: const Text('Login'),

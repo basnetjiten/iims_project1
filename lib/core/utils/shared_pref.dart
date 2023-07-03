@@ -3,19 +3,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 class PreferenceUtils {
   static SharedPreferences? _prefsInstance;
 
-  static Future<SharedPreferences> get _instance async =>
-      _prefsInstance ??= await SharedPreferences.getInstance();
+  // static Future<SharedPreferences> get _instance async =>
+  //     _prefsInstance ??= await SharedPreferences.getInstance();
 
   // call this method from iniState() function of mainApp().
   static init() async {
-    _prefsInstance = await _instance;
+    _prefsInstance = await  SharedPreferences.getInstance();
   }
 
   static String getString(String key) {
     return _prefsInstance?.getString(key) ?? '';
   }
 
-  static Future<bool> setString(String key, String value) async {
+  static Future<bool> storeFieldValue(String key, String value) async {
     return _prefsInstance!.setString(key, value);
   }
 
