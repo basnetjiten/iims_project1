@@ -26,4 +26,14 @@ class PreferenceUtils {
   static Future<bool> storeBoolean(String key, bool value) async {
     return _prefsInstance!.setBool(key, value);
   }
+
+  static void setIsLoggedIn(String key, bool isLoggedIn) {
+    _prefsInstance!.setBool(key, isLoggedIn);
+  }
+
+
+  static bool isLoggedIn(){
+   return  true;
+  }
+
 }

@@ -147,6 +147,8 @@ class _LoginPageState extends State<LoginPage> {
                         _username == storedUserName) {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const HomePage()));
+
+                      PreferenceUtils.setIsLoggedIn('isLoggedIn', true);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(

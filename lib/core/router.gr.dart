@@ -17,7 +17,7 @@ import 'package:awesome_app_iims/features/login/presentation/login_page.dart'
 import 'package:awesome_app_iims/features/profile/profile_page.dart' as _i4;
 import 'package:awesome_app_iims/features/registration/presentation/registeration_page.dart'
     as _i5;
-import 'package:awesome_app_iims/main.dart' as _i6;
+import 'package:awesome_app_iims/features/splash_page.dart' as _i6;
 import 'package:flutter/material.dart' as _i8;
 
 abstract class $AppRouter extends _i7.RootStackRouter {
@@ -59,14 +59,10 @@ abstract class $AppRouter extends _i7.RootStackRouter {
         child: const _i5.RegistrationPage(),
       );
     },
-    MyHomeRoute.name: (routeData) {
-      final args = routeData.argsAs<MyHomeRouteArgs>();
+    SplashRoute.name: (routeData) {
       return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i6.MyHomePage(
-          key: args.key,
-          title: args.title,
-        ),
+        child: const _i6.SplashPage(),
       );
     },
   };
@@ -167,39 +163,15 @@ class RegistrationRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.MyHomePage]
-class MyHomeRoute extends _i7.PageRouteInfo<MyHomeRouteArgs> {
-  MyHomeRoute({
-    _i8.Key? key,
-    required String title,
-    List<_i7.PageRouteInfo>? children,
-  }) : super(
-          MyHomeRoute.name,
-          args: MyHomeRouteArgs(
-            key: key,
-            title: title,
-          ),
+/// [_i6.SplashPage]
+class SplashRoute extends _i7.PageRouteInfo<void> {
+  const SplashRoute({List<_i7.PageRouteInfo>? children})
+      : super(
+          SplashRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'MyHomeRoute';
+  static const String name = 'SplashRoute';
 
-  static const _i7.PageInfo<MyHomeRouteArgs> page =
-      _i7.PageInfo<MyHomeRouteArgs>(name);
-}
-
-class MyHomeRouteArgs {
-  const MyHomeRouteArgs({
-    this.key,
-    required this.title,
-  });
-
-  final _i8.Key? key;
-
-  final String title;
-
-  @override
-  String toString() {
-    return 'MyHomeRouteArgs{key: $key, title: $title}';
-  }
+  static const _i7.PageInfo<void> page = _i7.PageInfo<void>(name);
 }
