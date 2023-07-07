@@ -2,15 +2,15 @@ import 'package:awesome_app_iims/blocs/counter_cubit.dart';
 import 'package:awesome_app_iims/core/router.dart';
 import 'package:awesome_app_iims/core/utils/shared_pref.dart';
 import 'package:awesome_app_iims/features/home/data/popular_movie_repo_impl.dart';
+import 'package:awesome_app_iims/features/login/presentation/blocs/auth_check_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 
-void main()async {
+void main() async {
   await PreferenceUtils.init();
   runApp(MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
@@ -20,12 +20,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: _appRouter.config(),
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return BlocProvider(
+      create: (context) => AuthCheckCubit(),
+      child: MaterialApp.router(
+        routerConfig: _appRouter.config(),
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
       ),
     );
   }
@@ -84,9 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-
-        },
+        onPressed: () {},
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

@@ -19,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    _authCheckCubit = AuthCheckCubit()..isLoggedIn();
+    _authCheckCubit = context.read<AuthCheckCubit>()..isLoggedIn();
   }
 
   @override
@@ -43,7 +43,6 @@ class _SplashPageState extends State<SplashPage> {
             style: TextStyle(color: Colors.red, fontSize: 25),
           ),
         ),
-
       ),
     );
   }
