@@ -22,8 +22,6 @@ class PopularMovieCubit extends Cubit<MovieState> {
       emit(PopularMovieFetched(movieModel.results));
     }
   }
-
-
 }
 
 // class Apple {

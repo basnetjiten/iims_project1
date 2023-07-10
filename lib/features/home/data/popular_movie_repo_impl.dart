@@ -10,7 +10,7 @@ class PopularMoveRepoImpl {
   PopularMoveRepoImpl();
 
   Future<PopularMovieList> getPopularMovie() async {
-    final data = await dioInstance.get('popular');
+    final data = await dioInstance.get('movie/popular');
 
     PopularMovieList popularMovieModel = PopularMovieList.fromJson(data.data);
 
@@ -19,7 +19,7 @@ class PopularMoveRepoImpl {
 
 
   Future<PopularMovieList>getTopRatedMovies()async{
-    final jsonResponse = await dioInstance.get('top_rated');
+    final jsonResponse = await dioInstance.get('movie/top_rated');
     PopularMovieList popularMovieModel = PopularMovieList.fromJson(jsonResponse.data);
 
     return popularMovieModel;

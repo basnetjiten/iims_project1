@@ -7,10 +7,10 @@ import 'package:dio/dio.dart';
 
 Dio dioInstance = Dio(
   BaseOptions(
-    baseUrl: 'https://api.themoviedb.org/3/movie/',
-    receiveTimeout: const Duration(seconds: 60000),
-    connectTimeout: const Duration(seconds: 60000),
-    responseType: ResponseType.json,
+    baseUrl: 'https://api.themoviedb.org/3/',
+    // receiveTimeout: const Duration(seconds: 60000),
+    // connectTimeout: const Duration(seconds: 60000),
+    // responseType: ResponseType.json,
     headers: <String, dynamic>{
       'Accept': 'application/json',
       'Content-Type': 'application/json',
