@@ -1,9 +1,9 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:awesome_app_iims/core/router.gr.dart';
-import 'package:awesome_app_iims/features/home/data/popular_movie_model.dart';
 import 'package:awesome_app_iims/features/home/presentation/blocs/popular_movie_cubit/popular_movie_cubit.dart';
 import 'package:awesome_app_iims/features/home/presentation/blocs/trending_movie_cubit/trending_movie_cubit.dart';
+import 'package:awesome_app_iims/features/home/presentation/search_result_page.dart';
+import 'package:awesome_app_iims/features/search/presentation/blocs/search_movie_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,9 +16,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late PopularMovieList movieList;
   late PopularMovieCubit _movieCubit;
   late TrendingMovieCubit _trendingMovieCubit;
+  late TextEditingController _searchEditingController;
+  late SearchMovieCubit _searchMovieCubit;
 
   int selectedIndex = 0;
 
@@ -31,6 +32,8 @@ class _HomePageState extends State<HomePage> {
     _trendingMovieCubit = TrendingMovieCubit();
     _movieCubit.getPopularMovieData();
     _trendingMovieCubit.fetchTrendingMovieData();
+    _searchEditingController = TextEditingController();
+    _searchMovieCubit = SearchMovieCubit();
 
     navContent = [
       BlocBuilder<PopularMovieCubit, MovieState>(
@@ -137,6 +140,28 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        title: TextFormField(
+          controller: _searchEditingController,
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                _searchMovieCubit
+                    .searchMovieWithQuery(_searchEditingController.text);
+
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => BlocProvider(
+                        create: (context) => _searchMovieCubit,
+                        child: const SearchedResulPage()),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.search))
+        ],
+      ),
       body: Center(
         child: navContent[selectedIndex],
       ),

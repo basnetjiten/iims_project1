@@ -9,18 +9,18 @@ import 'package:awesome_app_iims/features/home/data/popular_movie_model.dart';
 class PopularMoveRepoImpl {
   PopularMoveRepoImpl();
 
-  Future<PopularMovieList> getPopularMovie() async {
+  Future<MovieModel> getPopularMovie() async {
     final data = await dioInstance.get('movie/popular');
 
-    PopularMovieList popularMovieModel = PopularMovieList.fromJson(data.data);
+    MovieModel popularMovieModel = MovieModel.fromJson(data.data);
 
     return popularMovieModel;
   }
 
 
-  Future<PopularMovieList>getTopRatedMovies()async{
+  Future<MovieModel>getTopRatedMovies()async{
     final jsonResponse = await dioInstance.get('movie/top_rated');
-    PopularMovieList popularMovieModel = PopularMovieList.fromJson(jsonResponse.data);
+    MovieModel popularMovieModel = MovieModel.fromJson(jsonResponse.data);
 
     return popularMovieModel;
   }

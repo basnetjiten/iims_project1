@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => AuthCheckCubit(),
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         routerConfig: _appRouter.config(),
         title: 'Flutter Demo',
         theme: ThemeData(

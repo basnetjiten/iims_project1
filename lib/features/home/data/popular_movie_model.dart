@@ -5,20 +5,20 @@
 
 
 
-class PopularMovieList {
+class MovieModel {
   int page;
   List<Result> results;
   int totalPages;
   int totalResults;
 
-  PopularMovieList({
+  MovieModel({
     required this.page,
     required this.results,
     required this.totalPages,
     required this.totalResults,
   });
 
-  factory PopularMovieList.fromJson(Map<String, dynamic> json) => PopularMovieList(
+  factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
     page: json["page"],
     results: List<Result>.from(json["results"].map((singleResult) => Result.fromJson(singleResult))),
     totalPages: json["total_pages"],
@@ -67,9 +67,9 @@ class Result {
   });
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-    adult: json["adult"],
+    adult: json["adult"]?? '',
     backdropPath: json["backdrop_path"],
-    genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
+    genreIds:json["genre_ids"]!=null? List<int>.from(json["genre_ids"].map((x) => x)):[],
     id: json["id"],
     originalLanguage: json["original_language"],
     originalTitle: json["original_title"],
