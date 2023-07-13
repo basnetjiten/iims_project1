@@ -2,6 +2,7 @@ import 'package:awesome_app_iims/blocs/counter_cubit.dart';
 import 'package:awesome_app_iims/core/router.dart';
 import 'package:awesome_app_iims/core/utils/shared_pref.dart';
 import 'package:awesome_app_iims/features/login/presentation/blocs/auth_check_cubit.dart';
+import 'package:awesome_app_iims/features/search/presentation/blocs/search_movie_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
@@ -20,14 +21,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCheckCubit(),
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        routerConfig: _appRouter.config(),
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
+      create: (context) => SearchMovieCubit(),
+      child: BlocProvider(
+        create: (context) => AuthCheckCubit(),
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          routerConfig: _appRouter.config(),
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
         ),
       ),
     );

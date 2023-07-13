@@ -14,7 +14,9 @@ class SearchMovieCubit extends Cubit<SearchMovieState> {
   final SearchMovieRepoImpl _searchMovieRepoImpl;
 
   void searchMovieWithQuery(String query) async {
+
     emit(Loading());
+
     final searchedMovies =
         await _searchMovieRepoImpl.searchMovieWithQuery(query);
 
@@ -24,4 +26,6 @@ class SearchMovieCubit extends Cubit<SearchMovieState> {
       emit(Empty());
     }
   }
+
+
 }

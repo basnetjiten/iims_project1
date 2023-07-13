@@ -1,8 +1,10 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:awesome_app_iims/core/theme/text_style/app_text_style.dart';
 import 'package:awesome_app_iims/features/home/presentation/blocs/popular_movie_cubit/popular_movie_cubit.dart';
 import 'package:awesome_app_iims/features/home/presentation/blocs/trending_movie_cubit/trending_movie_cubit.dart';
 import 'package:awesome_app_iims/features/home/presentation/search_result_page.dart';
+import 'package:awesome_app_iims/features/home/presentation/widgets/movie_card_widget.dart';
 import 'package:awesome_app_iims/features/search/presentation/blocs/search_movie_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,12 +30,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _movieCubit = PopularMovieCubit();
+    _movieCubit = PopularMovieCubit()..getPopularMovieData();
     _trendingMovieCubit = TrendingMovieCubit();
-    _movieCubit.getPopularMovieData();
     _trendingMovieCubit.fetchTrendingMovieData();
     _searchEditingController = TextEditingController();
-    _searchMovieCubit = SearchMovieCubit();
+    _searchMovieCubit = context.read<SearchMovieCubit>();
 
     navContent = [
       BlocBuilder<PopularMovieCubit, MovieState>(
@@ -58,27 +59,14 @@ class _HomePageState extends State<HomePage> {
                       itemCount: state.movieResults.length,
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
-                        final singleMovieResult = state.movieResults[index];
+                        final singlePopularMovie = state.movieResults[index];
 
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 250,
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(20)),
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                      'https://image.tmdb.org/t/p/original/${singleMovieResult.posterPath}',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text(singleMovieResult.title)
-                            ],
+                          child: MovieCardContainerWidget(
+                            imageUrl: singlePopularMovie.posterPath,
+                            movieName: singlePopularMovie.title,
+                            movieOverView: singlePopularMovie.overview,
                           ),
                         );
                       }),
@@ -153,9 +141,7 @@ class _HomePageState extends State<HomePage> {
 
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => BlocProvider(
-                        create: (context) => _searchMovieCubit,
-                        child: const SearchedResulPage()),
+                    builder: (context) => const SearchedResulPage(),
                   ),
                 );
               },
