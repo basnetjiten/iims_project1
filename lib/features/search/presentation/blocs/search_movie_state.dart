@@ -10,6 +10,8 @@ class Loading extends SearchMovieState {}
 class Empty extends SearchMovieState {}
 
 class Loaded extends SearchMovieState {
+
+  ///Constructor
   Loaded(this.searchedMovies);
 
   final List<SearchResult> searchedMovies;

@@ -4,6 +4,7 @@ import 'package:awesome_app_iims/core/router.gr.dart';
 import 'package:awesome_app_iims/core/utils/shared_pref.dart';
 import 'package:awesome_app_iims/features/home/presentation/home_page.dart';
 import 'package:awesome_app_iims/features/profile/profile_page.dart';
+import 'package:awesome_app_iims/features/registration/service_class/register_user_service.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -137,6 +138,8 @@ class _LoginPageState extends State<LoginPage> {
               MaterialButton(
                 color: Colors.blue,
                 onPressed: () async {
+
+                  DatabaseService().getStudent(username: _username!);
                   if (_formKey.currentState!.validate()) {
                     final String storedUserName =
                         PreferenceUtils.getString('username');

@@ -36,7 +36,8 @@ class _SearchedResulPageState extends State<SearchedResulPage> {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state is Loaded) {
+              }
+              else if (state is Loaded) {
                 final searchMovies = state.searchedMovies;
 
                 return ListView.builder(

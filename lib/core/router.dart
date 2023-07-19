@@ -5,10 +5,10 @@ import 'package:awesome_app_iims/core/router.gr.dart';
 class AppRouter extends $AppRouter {
   @override
   final List<AutoRoute> routes = [
-    AutoRoute(page: HomeRoute.page,initial: true),
+    AutoRoute(page: HomeRoute.page),
     AutoRoute(page: HotNewsRoute.page),
     AutoRoute(page: SplashRoute.page),
-    AutoRoute(page: RegistrationRoute.page),
+    AutoRoute(page: RegistrationRoute.page,initial: true),
 
   ];
 }

@@ -17,8 +17,8 @@ import 'package:awesome_app_iims/features/login/presentation/login_page.dart'
 import 'package:awesome_app_iims/features/profile/profile_page.dart' as _i4;
 import 'package:awesome_app_iims/features/registration/presentation/registeration_page.dart'
     as _i5;
-import 'package:awesome_app_iims/features/splash_page.dart' as _i7;
-import 'package:awesome_app_iims/main.dart' as _i6;
+import 'package:awesome_app_iims/features/splash_page.dart' as _i6;
+import 'package:awesome_app_iims/main.dart' as _i7;
 import 'package:flutter/material.dart' as _i9;
 
 abstract class $AppRouter extends _i8.RootStackRouter {
@@ -60,20 +60,20 @@ abstract class $AppRouter extends _i8.RootStackRouter {
         child: const _i5.RegistrationPage(),
       );
     },
+    SplashRoute.name: (routeData) {
+      return _i8.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i6.SplashPage(),
+      );
+    },
     MyHomeRoute.name: (routeData) {
       final args = routeData.argsAs<MyHomeRouteArgs>();
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i6.MyHomePage(
+        child: _i7.MyHomePage(
           key: args.key,
           title: args.title,
         ),
-      );
-    },
-    SplashRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i7.SplashPage(),
       );
     },
   };
@@ -174,7 +174,21 @@ class RegistrationRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.MyHomePage]
+/// [_i6.SplashPage]
+class SplashRoute extends _i8.PageRouteInfo<void> {
+  const SplashRoute({List<_i8.PageRouteInfo>? children})
+      : super(
+          SplashRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRoute';
+
+  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i7.MyHomePage]
 class MyHomeRoute extends _i8.PageRouteInfo<MyHomeRouteArgs> {
   MyHomeRoute({
     _i9.Key? key,
@@ -209,18 +223,4 @@ class MyHomeRouteArgs {
   String toString() {
     return 'MyHomeRouteArgs{key: $key, title: $title}';
   }
-}
-
-/// generated route for
-/// [_i7.SplashPage]
-class SplashRoute extends _i8.PageRouteInfo<void> {
-  const SplashRoute({List<_i8.PageRouteInfo>? children})
-      : super(
-          SplashRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'SplashRoute';
-
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
 }

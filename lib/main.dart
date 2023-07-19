@@ -1,13 +1,20 @@
 import 'package:awesome_app_iims/blocs/counter_cubit.dart';
 import 'package:awesome_app_iims/core/router.dart';
 import 'package:awesome_app_iims/core/utils/shared_pref.dart';
-import 'package:awesome_app_iims/features/login/presentation/blocs/auth_check_cubit.dart';
 import 'package:awesome_app_iims/features/search/presentation/blocs/search_movie_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:awesome_app_iims/firebase_options.dart';
+
+
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await PreferenceUtils.init();
   runApp(MyApp());
 }
@@ -22,16 +29,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SearchMovieCubit(),
-      child: BlocProvider(
-        create: (context) => AuthCheckCubit(),
-        child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          routerConfig: _appRouter.config(),
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: _appRouter.config(),
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
         ),
       ),
     );

@@ -1,7 +1,10 @@
 import 'package:auto_route/annotations.dart';
 import 'package:awesome_app_iims/core/utils/shared_pref.dart';
 import 'package:awesome_app_iims/features/login/presentation/login_page.dart';
+import 'package:awesome_app_iims/features/registration/service_class/register_user_service.dart';
 import 'package:flutter/material.dart';
+import 'package:google_places_flutter/google_places_flutter.dart';
+import 'package:google_places_flutter/model/prediction.dart';
 
 @RoutePage()
 class RegistrationPage extends StatefulWidget {
@@ -19,10 +22,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
   late TextEditingController _passwordController;
+  late TextEditingController mapController;
 
   @override
   void initState() {
     _userNameController = TextEditingController();
+    mapController = TextEditingController();
     _firstNameController = TextEditingController();
     _lastNameController = TextEditingController();
     _passwordController = TextEditingController();
@@ -139,8 +144,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   PreferenceUtils.storeFieldValue(
                       'password', _passwordController.text);
 
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => const LoginPage()));
+                  DatabaseService().addStudent(
+                    username: _userNameController.text,
+                    firstName: _firstNameController.text,
+                    lastName: _lastNameController.text,
+                    password: _passwordController.text,
+                  );
+
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const LoginPage()));
 
                   //}
                 },

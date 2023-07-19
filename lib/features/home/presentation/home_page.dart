@@ -129,6 +129,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const Text(
+          'N',
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: Colors.red, fontSize: 50),
+        ),
         backgroundColor: Colors.green,
         title: TextFormField(
           controller: _searchEditingController,
@@ -136,16 +141,17 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
               onPressed: () {
-                _searchMovieCubit
-                    .searchMovieWithQuery(_searchEditingController.text);
 
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const SearchedResulPage(),
-                  ),
-                );
+                _searchMovieCubit.searchMovieWithQuery(_searchEditingController.text);
+
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(
+                //     builder: (context) => const SearchedResulPage(),
+                //   ),
+                // );
               },
-              icon: const Icon(Icons.search))
+              icon: const Icon(Icons.search)),
+
         ],
       ),
       body: Center(
