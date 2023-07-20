@@ -144,11 +144,11 @@ class _HomePageState extends State<HomePage> {
 
                 _searchMovieCubit.searchMovieWithQuery(_searchEditingController.text);
 
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) => const SearchedResulPage(),
-                //   ),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const SearchedResulPage(),
+                  ),
+                );
               },
               icon: const Icon(Icons.search)),
 

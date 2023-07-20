@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                 validator: (userInputData) {
                   if (userInputData != null && userInputData.trim().isEmpty) {
                     return 'User name is required field';
-                  } else if (userInputData!.length < 6) {
+                  } else if (userInputData!.length < 3) {
                     return 'Username must be greater than 6 character';
                   }
                   return null;
@@ -123,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (userInputPassword != null &&
                       userInputPassword.trim().isEmpty) {
                     return 'Password is required field';
-                  } else if (userInputPassword!.length < 5) {
+                  } else if (userInputPassword!.length < 2) {
                     return 'Password must be greater than 10 character';
                   }
                   return null;
@@ -139,12 +139,19 @@ class _LoginPageState extends State<LoginPage> {
                 color: Colors.blue,
                 onPressed: () async {
 
-                  DatabaseService().getStudent(username: _username!);
                   if (_formKey.currentState!.validate()) {
-                    final String storedUserName =
-                        PreferenceUtils.getString('username');
-                    final String storedPassword =
-                        PreferenceUtils.getString('password');
+                    //Extract value from local strorage
+                    // final String storedUserName =
+                    //     PreferenceUtils.getString('username');
+                    // final String storedPassword =
+                    //     PreferenceUtils.getString('password');
+                    //Extract value from firebase
+                    final String? storedUserName =
+                        await DatabaseService.getUsername(
+                            userEnteredUserName: _username!);
+                    final String? storedPassword =
+                        await DatabaseService.getPassword(
+                            userEnteredUserName: _username!);
 
                     if (storedPassword == _password &&
                         _username == storedUserName) {

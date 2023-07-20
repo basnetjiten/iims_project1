@@ -33,11 +33,49 @@ class DatabaseService {
           FirebaseFirestore.instance.collection('students');
       final snapshot = await users.doc(username).get();
       final data = snapshot.data() as Map<String, dynamic>;
-
-      print("STROED DATA ${data}");
       return data['full_name'];
     } catch (e) {
       return 'Error fetching user';
+    }
+  }
+
+  /// Returns [username] from the doc based on the provided [userEnteredUserName]
+  static Future<String?> getUsername(
+      {required String userEnteredUserName}) async {
+    String? username;
+
+    try {
+      CollectionReference studentsCollection =
+          FirebaseFirestore.instance.collection('students');
+
+      final snapshot = await studentsCollection.doc(userEnteredUserName).get();
+
+      final data = snapshot.data() as Map<String, dynamic>;
+
+      username = data['username'];
+
+      return username;
+    } catch (e) {
+      return username;
+    }
+  }
+
+  /// Returns [password] from the doc based on the provided [userEnteredUserName]
+  static Future<String?> getPassword(
+      {required String userEnteredUserName}) async {
+    String? password;
+    try {
+      CollectionReference students =
+          FirebaseFirestore.instance.collection('students');
+
+      final studentSnapshot = await students.doc(userEnteredUserName).get();
+
+      final docs = studentSnapshot.data() as Map<String, dynamic>;
+
+      password = docs['password'];
+      return password;
+    } catch (_) {
+      return password;
     }
   }
 }
